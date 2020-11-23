@@ -38,9 +38,17 @@
                     </tbody>
                 </table>
 
-                <c:if test="${sessionScope.login_employee.id == report.employee.id}">
+                <c:choose>
+                <c:when test="${sessionScope.login_employee.id == report.employee.id}">
+                    <p>いいね全<c:out value="${report.goods}" />件</p>
                     <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
-                </c:if>
+                </c:when>
+                <c:otherwise>
+                    <form method="GET" action="<c:url value='/reports/good' />">
+                        <button type="submit" name="good">いいね</button>
+                    </form>
+                </c:otherwise>
+                </c:choose>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>

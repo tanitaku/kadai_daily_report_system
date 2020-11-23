@@ -3,7 +3,6 @@ package controllers.reports;
 import java.io.IOException;
 
 import javax.persistence.EntityManager;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +13,16 @@ import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsShowServlet
+ * Servlet implementation class GoodServlet
  */
-@WebServlet("/reports/show")
-public class ReportsShowServlet extends HttpServlet {
+@WebServlet("/reports/good")
+public class GoodServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsShowServlet() {
+    public GoodServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,25 +35,21 @@ public class ReportsShowServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
+        Report r = em.find(Report.class, (Integer)(request.getSession().getAttribute("reports_id")));
 
 
+        String goods = request.getParameter("good");
+        if(goods != null) {
             Integer count = r.getGoods();
-            if(count != null) {
-                r.setGoods(count);
-            } else {
-                r.setGoods(0);
-                em.getTransaction().begin();
-                em.getTransaction().commit();
-                em.close();
-            }
+            count++;
+            r.setGoods(count);
+        }
+        em.getTransaction().begin();
+        em.getTransaction().commit();
+        em.close();
 
-        request.setAttribute("report", r);
-        request.setAttribute("_token", request.getSession().getId());
-        request.getSession().setAttribute("reports_id", r.getId());
+        request.getSession().setAttribute("flush", "いいねを投稿しました。");
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
-        rd.forward(request, response);
-    }
-
+        response.sendRedirect(request.getContextPath() + "/reports/index");
+}
 }
