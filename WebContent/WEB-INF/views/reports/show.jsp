@@ -44,7 +44,7 @@
                     <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
                 </c:when>
                 <c:otherwise>
-                    <form method="GET" action="<c:url value='/reports/good' />">
+                    <form method="POST" action="<c:url value='/reports/good' />">
                         <button type="submit" name="good">いいね</button>
                     </form>
                 </c:otherwise>

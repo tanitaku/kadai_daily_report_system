@@ -49,6 +49,7 @@ public class ReportsShowServlet extends HttpServlet {
                 em.close();
             }
 
+
         request.setAttribute("report", r);
         request.setAttribute("_token", request.getSession().getId());
         request.getSession().setAttribute("reports_id", r.getId());
