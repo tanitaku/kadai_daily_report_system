@@ -63,8 +63,17 @@ public class GoodServlet extends HttpServlet {
                   request.getSession().setAttribute("flush", "いいね済みです。");
           }else {
 
+              Report r = em.find(Report.class, (Integer)(request.getSession().getAttribute("reports_id")));
+              String goods = request.getParameter("good");
+              if(goods != null) {
+                  Integer count = r.getGoods();
+                  count++;
+                  r.setGoods(count);
+              }
+
                   em.getTransaction().begin();
                   em.persist(l2);
+                  em.persist(r);
                   em.getTransaction().commit();
                   em.close();
                   request.getSession().setAttribute("flush", "いいねを投稿しました。");

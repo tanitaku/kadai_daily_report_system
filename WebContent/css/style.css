@@ -116,7 +116,7 @@ select {
 }
 
 #header_menu {
-    width: 68%;
+    width: 63%;
     padding-top: 17px;
     padding-left: 3%;
     display: inline-block;
@@ -124,7 +124,7 @@ select {
 
 #employee_name {
     color: #cccccc;
-    width: 25%;
+    width: 30%;
     padding-right: 3%;
     text-align: right;
     display: inline-block;
