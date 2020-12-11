@@ -9,5 +9,6 @@
         </form>
 
         <p><a href="<c:url value='/reports/index' />">一覧に戻る</a></p>
+        <c:out value="test"></c:out>
     </c:param>
 </c:import>

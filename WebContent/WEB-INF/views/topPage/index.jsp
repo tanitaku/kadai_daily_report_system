@@ -19,12 +19,14 @@
                     <th class="report_action">操作</th>
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
-                    <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out value="${report.employee.name}" /></td>
-                        <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
-                        <td class="report_title">${report.title}</td>
-                        <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
-                    </tr>
+                    <c:if test="${report.employee.id == login_employee.id}">
+                                <tr class="row${status.count % 2}">
+                                    <td class="report_name"><c:out value="${report.employee.name}" /></td>
+                                    <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
+                                    <td class="report_title">${report.title}</td>
+                                    <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
+                                </tr>
+                   </c:if>
                 </c:forEach>
             </tbody>
         </table>
@@ -43,5 +45,6 @@
             </c:forEach>
         </div>
         <p><a href="<c:url value='/reports/new' />">新規日報の登録</a></p>
+        <p><a href="<c:url value='/test' />">フォロワー一覧</a></p>
     </c:param>
 </c:import>

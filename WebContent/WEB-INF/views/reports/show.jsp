@@ -19,7 +19,7 @@
                         </tr>
                         <tr>
                             <th>内容</th>
-                            <td>
+                            <td class="b-all">
                                 <pre><c:out value="${report.content}" /></pre>
                             </td>
                         </tr>

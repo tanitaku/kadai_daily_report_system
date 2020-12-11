@@ -45,11 +45,12 @@ public class TopPageIndexServlet extends HttpServlet {
         } catch(Exception e) {
             page = 1;
         }
+
         List<Report> reports = em.createNamedQuery("getMyAllReports", Report.class)
                                  .setParameter("employee", login_employee)
                                  .setFirstResult(15 * (page - 1))
                                  .setMaxResults(15)
-                                 .getResultList();
+                                .getResultList();
 
         long reports_count = (long)em.createNamedQuery("getMyReportsCount", Long.class)
                                       .setParameter("employee", login_employee)
@@ -59,6 +60,7 @@ public class TopPageIndexServlet extends HttpServlet {
         request.setAttribute("reports", reports);
         request.setAttribute("reports_count", reports_count);
         request.setAttribute("page", page);
+        request.setAttribute("login_employee", login_employee);
 
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
